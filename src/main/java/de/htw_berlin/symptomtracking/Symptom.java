@@ -8,8 +8,14 @@ public class Symptom {
     private String beschreibung;
     private int staerke;
 
-    public Symptom(String bezeichnung) {
+    public Symptom() {
+    }
+
+    public Symptom(String bezeichnung, LocalDate datum, String beschreibung, int staerke) {
         this.bezeichnung = bezeichnung;
+        this.datum = datum;
+        this.beschreibung = beschreibung;
+        this.staerke = staerke;
     }
 
     public int getStaerke() {

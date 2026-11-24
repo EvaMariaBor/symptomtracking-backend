@@ -1,8 +1,22 @@
 package de.htw_berlin.symptomtracking;
 
 import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
+@Entity
 public class Symptom {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
     private String bezeichnung;
     private LocalDate datum;
     private String beschreibung;

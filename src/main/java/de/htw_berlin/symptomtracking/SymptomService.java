@@ -1,33 +1,26 @@
 package de.htw_berlin.symptomtracking;
 
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class SymptomService {
-    // Temporäre In-Memory-Liste als Ersatz, solange noch keine Datenbank angebunden ist
-    private final List<Symptom> symptoms = new ArrayList<>(List.of(
-            new Symptom("Kopfschmerzen", LocalDate.now(), "pochend", 6),
-            new Symptom("Augenzucken", LocalDate.now(), "rechts", 3)
-    ));
-    private long nextId = 3L;
+
+    private final SymptomRepository repository;
+
+    public SymptomService(SymptomRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Symptom> getAll() {
-        return symptoms;
+        return repository.findAll();
     }
 
     public Symptom get(Long id) {
-        // Einfache Suche (wird später durch JPA Repository ersetzt)
-        return symptoms.stream()
-                .findFirst()
-                .orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     public Symptom save(Symptom symptom) {
-        symptoms.add(symptom);
-        return symptom;
+        return repository.save(symptom);
     }
 }
